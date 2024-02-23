@@ -22,7 +22,9 @@ def pregunta_01():
     40
 
     """
-    return
+    numero_de_filas = tbl0.shape[0]
+
+    return numero_de_filas
 
 
 def pregunta_02():
@@ -33,7 +35,10 @@ def pregunta_02():
     4
 
     """
-    return
+
+    numero_columnas = tbl0.shape[1]
+
+    return numero_columnas
 
 
 def pregunta_03():
@@ -50,7 +55,10 @@ def pregunta_03():
     Name: _c1, dtype: int64
 
     """
-    return
+    conteo_por_letra = tbl0['_c1'].value_counts().sort_index()
+    conteo_por_letra.name = '_c1'
+
+    return conteo_por_letra
 
 
 def pregunta_04():
@@ -218,3 +226,6 @@ def pregunta_13():
     Name: _c5b, dtype: int64
     """
     return
+
+
+print(pregunta_03())
