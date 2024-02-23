@@ -22,7 +22,7 @@ def pregunta_01():
     40
 
     """
-    numero_de_filas = tbl0.shape[0]
+    numero_de_filas = len(tbl0)
 
     return numero_de_filas
 
@@ -36,7 +36,7 @@ def pregunta_02():
 
     """
 
-    numero_columnas = tbl0.shape[1]
+    numero_columnas = len(tbl0.columns)
 
     return numero_columnas
 
@@ -228,4 +228,6 @@ def pregunta_13():
     return
 
 
+print(pregunta_01())
+print(pregunta_02())
 print(pregunta_03())
