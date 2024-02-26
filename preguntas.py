@@ -36,7 +36,7 @@ def pregunta_02():
 
     """
 
-    numero_columnas = len(tbl0.columns)
+    numero_columnas = tbl0.shape[1]
 
     return numero_columnas
 
