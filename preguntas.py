@@ -35,10 +35,8 @@ def pregunta_02():
     4
 
     """
-
-    numero_columnas = tbl0.shape[1]
-
-    return numero_columnas
+    col = tbl0.shape[1]
+    return col
 
 
 def pregunta_03():
@@ -253,7 +251,7 @@ def pregunta_13():
     return
 
 
-print(pregunta_01())
+#print(pregunta_01())
 print(pregunta_02())
 print(pregunta_03())
 print(pregunta_04())
