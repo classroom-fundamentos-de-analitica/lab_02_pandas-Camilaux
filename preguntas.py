@@ -55,10 +55,13 @@ def pregunta_03():
     Name: _c1, dtype: int64
 
     """
-    conteo_por_letra = tbl0['_c1'].value_counts().sort_index()
-    conteo_por_letra.name = '_c1'
+    """conteo_por_letra = tbl0['_c1'].value_counts().sort_index()
+    conteo_por_letra.name = '_c1'"""
+    conteo = tbl0['_c1'].value_counts()
+    conteo = conteo.sort_index()
+    conteo.name = '_c1'
 
-    return conteo_por_letra
+    return conteo
 
 
 def pregunta_04():
@@ -73,7 +76,9 @@ def pregunta_04():
     E    4.785714
     Name: _c2, dtype: float64
     """
-    return
+    prome = tbl0.groupby('_c1')['_c2'].mean()
+
+    return prome
 
 
 def pregunta_05():
@@ -90,7 +95,9 @@ def pregunta_05():
     E    9
     Name: _c2, dtype: int64
     """
-    return
+    maxi = tbl0.groupby('_c1')['_c2'].max()
+
+    return maxi
 
 
 def pregunta_06():
@@ -102,7 +109,11 @@ def pregunta_06():
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     """
-    return
+    uni = tbl1.groupby('_c4').nunique()
+    lista = uni.index.tolist()
+    mayus = [letra.upper() for letra in lista]
+    
+    return mayus
 
 
 def pregunta_07():
@@ -118,7 +129,9 @@ def pregunta_07():
     E    67
     Name: _c2, dtype: int64
     """
-    return
+    suma = tbl0.groupby('_c1')['_c2'].sum()
+
+    return suma
 
 
 def pregunta_08():
@@ -136,7 +149,10 @@ def pregunta_08():
     39   39   E    5  1998-01-26    44
 
     """
-    return
+    suma = tbl0['_c0'] + tbl0['_c2']
+    tbl0['suma'] = suma
+
+    return tbl0
 
 
 def pregunta_09():
@@ -154,7 +170,8 @@ def pregunta_09():
     39   39   E    5  1998-01-26  1998
 
     """
-    return
+    tbl0['año'] = tbl0['_c3'].str.split('-').str[0]
+    return tbl0
 
 
 def pregunta_10():
@@ -171,7 +188,15 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    return
+    #resultado = tbl0.groupby('_c1')['_c2'].apply(lambda x: ':'.join(x.astype(str))).reset_index()
+    tbl0['_c2'] = tbl0['_c2'].astype(int)
+
+    # Ordenando el DataFrame por _c1 y _c2
+    orden = tbl0.sort_values(by=['_c1', '_c2'])
+
+    # Ahora aplicamos groupby a este DataFrame ordenado y concatenamos los valores de _c2
+    resultado = orden.groupby('_c1')['_c2'].apply(lambda x: ':'.join(x.astype(str))).reset_index()
+    return resultado
 
 
 def pregunta_11():
@@ -231,3 +256,10 @@ def pregunta_13():
 print(pregunta_01())
 print(pregunta_02())
 print(pregunta_03())
+print(pregunta_04())
+print(pregunta_05())
+print(pregunta_06())
+print(pregunta_07())
+print(pregunta_08())
+print(pregunta_09())
+print(pregunta_10())
