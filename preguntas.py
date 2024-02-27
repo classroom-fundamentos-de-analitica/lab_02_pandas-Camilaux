@@ -207,7 +207,9 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    return
+    res = tbl1.groupby("_c0")["_c4"].apply(lambda x: ','.join(sorted(x))).reset_index()
+    res.columns = ["_c0","_c4"]
+    return res
 
 
 def pregunta_12():
@@ -225,7 +227,9 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
-    return
+    tbl2['_c5'] = tbl2['_c5a'] + ':' + tbl2['_c5b'].astype(str)
+    tb = tbl2.groupby('_c0')['_c5'].apply(lambda x: ','.join(sorted(x))).reset_index()
+    return tb
 
 
 def pregunta_13():
@@ -242,9 +246,8 @@ def pregunta_13():
     E    275
     Name: _c5b, dtype: int64
     """
-    return
+    mer = pd.merge(tbl0, tbl2, on='_c0')
+    suma = mer.groupby('_c1')['_c5b'].sum()
+                              
+    return suma
 
-print(pregunta_10())
-print(pregunta_11())
-print(pregunta_12())
-print(pregunta_13())
