@@ -185,13 +185,8 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    #resultado = tbl0.groupby('_c1')['_c2'].apply(lambda x: ':'.join(x.astype(str))).reset_index()
-    tbl0['_c2'] = tbl0['_c2'].astype(int)
-
-    # Ordenando el DataFrame por _c1 y _c2
+    tbl0['_c2'] = tbl0['_c2'].astype(str)
     orden = tbl0.sort_values(by=['_c1', '_c2'])
-
-    # Ahora aplicamos groupby a este DataFrame ordenado y concatenamos los valores de _c2
     resultado = orden.groupby('_c1')['_c2'].apply(lambda x: ':'.join(x.astype(str))).reset_index()
     return resultado
 
@@ -249,7 +244,6 @@ def pregunta_13():
     """
     return
 
-print(pregunta_09())
 print(pregunta_10())
 print(pregunta_11())
 print(pregunta_12())
