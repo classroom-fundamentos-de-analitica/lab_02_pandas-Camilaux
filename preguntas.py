@@ -185,11 +185,16 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    tbl0['_c2'] = tbl0['_c2'].astype(str)
-    orden = tbl0.sort_values(by=['_c1', '_c2'])
-    resultado = orden.groupby('_c1')['_c2'].apply(lambda x: ':'.join(x.astype(str))).reset_index()
-    return resultado
 
+    tbl0['_c2'] = tbl0['_c2'].astype(str)  # Asegurando que _c2 es de tipo string.
+    orden = tbl0.sort_values(by=['_c1', '_c2'])  # Ordenando los valores como necesitas.
+
+    # Agrupando y uniendo los valores. Sin aplicar 'reset_index()' aquí para mantener '_c1' como índice.
+    resultado = orden.groupby('_c1')['_c2'].apply(lambda x: ':'.join(x))
+
+    # Transformando el resultado en un DataFrame y asegurando que '_c1' sea el índice y '_c2' el nombre de la columna.
+    resultado = resultado.reset_index(name='_c2').set_index('_c1')
+    return resultado
 
 def pregunta_11():
     """
@@ -250,5 +255,3 @@ def pregunta_13():
     suma = mer.groupby('_c1')['_c5b'].sum()
                               
     return suma
-
-print(pregunta_10())
